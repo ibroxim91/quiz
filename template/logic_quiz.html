@@ -1,0 +1,43 @@
+{% extends 'home.html' %}
+
+{% block style %}
+<style>
+    .card{
+        background: rgb(255, 255, 255,0.5);
+    }
+    li{
+        list-style-type: none;
+        font-size: 28px;
+    }
+    textarea{
+        padding: 5px;
+    }
+
+</style><br><br><br>
+    <div class="container" style="margin:0px auto;">
+       
+        <div class="card mt-5 p-5 text-center">
+
+            <form action="" method="POST">{% csrf_token %}
+                <div class="row">
+                    <!-- {% if messages %}
+                        {% for m in  messages %}
+                            <h2 class="text-center mb-5 text-{{ m.tags }}"> {{ m }} </h2>
+                        {% endfor %}
+                    {% endif %} -->
+                    <h2 class="text-center mb-5 text">
+                       {{ l_quiz.title }} 
+                    </h2>
+                        <input type="hidden" name="quiz_id" value="{{ l_quiz.id }}">
+                    <div class="col-md-6 offset-2">
+                       <textarea name="answer" required id="" cols="90" rows="3"></textarea>
+                    </div>
+                   
+                    <center><button type="submit" class="btn btn-info mt-3" style="border-radius: 30px; width: 300px; "><h5> Javob berish</h5></button></center>
+                </div>
+            </form>
+        </div>
+   
+    </div>
+{% endblock style %}
+    

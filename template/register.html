@@ -1,0 +1,33 @@
+{% extends 'home.html' %}
+
+{% block style %}
+<style>
+    .card{
+        background: rgb(255, 255, 255,0.5);
+    }
+
+</style><br><br><br>
+    <div class="container" style="margin:0px auto;">
+       
+        <div class="card mt-5 p-5">
+            <form action="" method="POST">{% csrf_token %}
+                <div class="row">
+                    {% if messages %}
+                        {% for m in  messages %}
+                            <h2 class="text-center mb-5 text-{{ m.tags }}"> {{ m }} </h2>
+                        {% endfor %}
+                    {% endif %}
+                    <h2 class="text-center mb-5 text-info">Bir martalik parolni kiriting</h2>
+                    
+                    <div class="col-md-6 offset-3">
+                        <input class="form-control mb-4" required placeholder="Bir martalik parolni kiriting" type="text" name="password">
+                    </div>
+                   
+                    <center><button type="submit" class="btn btn-info mt-3" style="border-radius: 30px; width: 300px; "><h5> Tasdiqlash</h5></button></center>
+                </div>
+            </form>
+        </div>
+   
+    </div>
+{% endblock style %}
+    

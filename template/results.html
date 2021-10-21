@@ -1,0 +1,77 @@
+{% extends 'home.html' %}
+
+{% block style %}
+<style>
+    .card{
+        background: rgb(255, 255, 255,0.5);
+    }
+    li{
+        list-style-type: none;
+        font-size: 28px;
+    }
+    
+    .text{
+        padding: 15px;
+        background: seashell;
+        border-radius: 50px;
+        margin-top: 60px;
+    }
+    .name{
+        padding: 15px;
+        background: silver;
+    }
+
+
+</style><br><br><br>
+    <div class="container" style="margin:0px auto;">
+       
+        <div class="card mt-5 p-5 text-center">
+            <div class="text-center name">
+                {% if user %}<h2>{{ user.name }} {{ user.surname }} test javoblari </h2>{% endif %}
+            </div>
+            <ul>
+                <li> Savollar soni: {{ results.count }}</li>
+          
+                <li> To'gri javoblar soni: {{ true_answers }}</li>
+            </ul>
+            <br>
+            <br>
+            {% for r in results %}
+            <h2 class="text"> {{forloop.counter}} .{% if r.quiz.title %}{{  r.quiz.title }}{% endif %}
+                {% if r.logic_quiz.title %} {{  r.logic_quiz.title }} {% endif %}    
+            </h2><br><br>
+             
+             {% for ans in r.quiz.answers.all %}
+                {% if ans.image %}
+                    <img src="{{ans.image.url}}" style="height: 250px; width: 250px; margin:0px auto;" alt="">
+                {% else %}
+                    <p></p>
+                {% endif %}
+            
+                {% if user %}
+
+             <h3 {% if ans.true_answer   %}  {% if r.user_answer == ans  %}class="text-success"  {% endif %}  {% endif %}> 
+                 {{ans.title}} 
+             </h3>
+             {% else %}
+             <h3 > 
+                {{ans.title}} 
+            </h3>
+             {% endif %}
+                 
+                
+                     
+            <br><br>
+             {% endfor %}
+             
+             <h1 class="text-info"><b> </b>{% if r.logic_quiz.title %} {{  r.logic_answer }} {% endif %} </h1>
+                 
+         {% endfor %}
+
+
+           <center> <a href="/" style="width: 300px;" class="btn btn-success "> Ortga qaytish</a></center>
+        </div>
+   
+    </div>
+{% endblock style %}
+    

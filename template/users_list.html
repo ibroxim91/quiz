@@ -1,0 +1,57 @@
+{% extends 'home.html' %}
+
+{% block style %}
+<style>
+    .card{
+        background: rgb(255, 255, 255,0.5);
+    }
+    body{
+        background-image: none;
+    }
+    li{
+        list-style-type: none;
+        font-size: 28px;
+    }
+    textarea{
+        padding: 5px;
+    }
+
+</style><br><br><br>
+    <div class="container" style="margin:0px auto;">
+       
+        <div class="card mt-5 p-5 text-center">
+
+            <div class="text-center mb-5">
+                <h2>{{ ways }} yonalishiga test topshirganlar ro'yxati</h2>
+            </div>
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th>#N</th>
+                    <th>Ismi Familyasi</th>
+                    <th>Telefon</th>
+                    <th>Yo'nalish</th>
+                    <th>Natijani </th>
+                  </tr>
+                </thead>
+                
+                <tbody>
+
+                  {% for u in users %}  
+                  <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td><a href="{% url 'main:user_results' u.id %}"> {{ u.name }} {{ u.surname }} </a></td>
+                    <td>{{ u.tel_num }}</td>
+                    <td>{{ u.ways }}</td>
+                  </tr>
+                  {% endfor %}
+                  
+                </tbody>
+              </table>
+              
+            
+        </div>
+   
+    </div>
+{% endblock style %}
+    

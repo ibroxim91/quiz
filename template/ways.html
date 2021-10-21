@@ -1,0 +1,33 @@
+{% extends 'home.html' %}
+
+{% block style %}
+<style>
+    .card{
+        background: rgb(255, 255, 255,0.5);
+    }
+</style>
+    <div class="container mt-5">
+        
+        <div class="row mt-5">
+            <h1 class="text-center text-info">Yo'nalishni tanlag</h1>
+           {% if view_result %}
+                 <p class="text-center text-white">Natijalarni ko'rish uchun avval yo'nalishni tanlang</p>
+           {% else %} 
+                <p class="text-center text-white">Qaysi sohaga qiziqasiz o'sha sohani tanlang</p>
+           {% endif %} 
+           
+            {% for ways in cats %}
+                <div class="col-md-4 mt-5">
+                    <div class="card mt-5 p-3">
+                        <center>
+                            <h1 class="{{ways.icon}} text-info"></h1><br>
+                            <a   {% if view_result %}  href="{% url 'main:users_list' ways.slug %}"  {% else %} href="{% url 'main:main' ways.slug %}"  {% endif %}  class="btn btn-outline-info"><h3>{{ways.name}}</h3></a>
+                        </center>
+                    </div>
+                </div>
+            {% endfor %}
+                
+        </div>
+    </div>
+{% endblock style %}
+    

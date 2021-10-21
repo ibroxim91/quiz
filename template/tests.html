@@ -1,0 +1,54 @@
+{% extends 'home.html' %}
+
+{% block style %}
+<style>
+
+    .container{
+        background: rgb(255, 255, 255,0.5);
+        border-radius: 10px 10px 0 0 ;
+        width: 60%;
+        z-index: 10;
+    }
+
+    .text{
+        padding: 15px;
+        background: seashell;
+        border-radius: 50px;
+    }
+
+    input[type="radio"]{
+        width: 35px;
+        height: 35px;
+    }
+
+</style>
+    <div class="container mt-5 text-center">
+        <h1 class="text-white m-2">Savollar({{quiz.count}})</h1>
+        <hr>
+        <form action="{% url 'main:check' %}" method="post">
+            {% csrf_token %}
+        {% for quiz in quiz %}
+           <h2 class="text"> {{forloop.counter}} .{{quiz.title}}</h2><br><br>
+            
+            {% for ans in quiz.answers.all %}
+            
+                {% if ans.image %}
+                    <img src="{{ans.image.url}}" style="height: 150px;" alt="">
+                    {% else %}
+                    <p></p>
+                {% endif %}
+            <h3> <input type="radio" value="{{ans.id}}" name="{{ quiz.id }}">  {{ans.title}}</h3>
+                    
+           <br><br>
+            {% endfor %}
+                
+        {% endfor %}
+        <br>
+        <button type="submit" class="btn btn-info mb-3"> Tasdiqlash</button>
+        
+        
+    </form>
+            
+    </div>
+{% endblock style %}
+    
